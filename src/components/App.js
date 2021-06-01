@@ -1,36 +1,38 @@
-import React, {Component, useState} from "react";
+import React, { useState} from "react";
+import  slides  from '../data'
 import '../styles/App.css';
 
-const App = (props) => {
-  const[index, setIndex] = useState(0); 
+const App = () => {
+
+  const [currSlides, setCurrSlides] = useState(0)
+
+  const clickPrev=()=>{
   
-  const nextSlide = () =>{
-    if(index<props.slides.length-1){
-      setIndex(index+1);
-    }
-  }
+       currSlides >0 && setCurrSlides(currSlides-1);
+       }
+  
+  
+  const clickNext=()=>{
+       currSlides <slides.length-1 && setCurrSlides(currSlides+1);
+       }
+  
+  const clickRestart = () => {
+      setCurrSlides(0);
+  }     
 
-  const prevSlide = () =>{
-    index>0 && setIndex(index-1);
-    //can use and operator to render statements.
-
-  }
-
-  const restart = ()=>{
-    setIndex(0);
-  }
 
   return (
     <>
-      <div className = "App">
-        <div className="carousel">
-          <h1 data-testid="title"> {props.slides[index].title} </h1>
-          <p data-testid="text" > {props.slides[index].text}</p>
+     <div className="App">
+      <div className="carousel">
+            <h1 data-testid="title">{slides[currSlides].title}</h1>
+            <p data-testid="text">{slides[currSlides].text}</p>
         </div>
-      <button disabled = {index===props.slides.length-1?true:false} onClick = {nextSlide} data-testid="button-next">next</button>
-      <button disabled = {index===0?true:false}  onClick = {prevSlide} data-testid="button-prev">prev</button>
-      <button disabled = {index===0?true:false} onClick = {restart} data-testid="button-restart">restart</button>
-      </div>
+        <button onClick={clickPrev} disabled={currSlides===0?true:false} data-testid="button-prev" >Prev</button>
+        <button onClick={clickNext} disabled={currSlides===slides.length-1?true:false} data-testid="button-next">Next</button>
+        <button onClick={clickRestart} disabled={currSlides===0?true:false} data-testid="button-restart">Restart</button>
+    </div> 
+    
     </>
   )
 }
