@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React, {Component, useState} from "react"
 import  slides  from '../data'
 import '../styles/App.css';
 
