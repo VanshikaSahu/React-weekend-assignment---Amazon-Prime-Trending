@@ -1,4 +1,6 @@
 import React, {Component, useState} from "react";
+import  slides  from '../data'
+import '../styles/App.css';
 
 const App = (props) => {
   const[index, setIndex] = useState(0); 
@@ -21,11 +23,13 @@ const App = (props) => {
 
   return (
     <>
+    <div className="App">
       <h1 data-testid="title"> {props.slides[index].title} </h1>
       <p data-testid="text" > {props.slides[index].text}</p>
-      <button disabled = {index===props.slides.length-1?true:false}onClick = {nextSlide} data-testid="button-next">next</button>
+      <button disabled = {index===slides.length-1 ? true:false}  onClick = {nextSlide} data-testid="button-next">next</button>
       <button disabled = {index===0?true:false}  onClick = {prevSlide} data-testid="button-prev">prev</button>
       <button disabled = {index===0?true:false} onClick = {restart} data-testid="button-restart">restart</button>
+    </div>
     </>
   )
 }
